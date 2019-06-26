@@ -1,11 +1,14 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 
 const useEnhancedReducer = function useEnhancedReducer(
   reducer,
   initialState = {},
   middlewares = [],
 ) {
-  const [state, originalDispatch] = useReducer(reducer, initialState);
+  const [state, originalDispatch] = React.useReducer(reducer, initialState);
+  const cleanedMiddlewares = middlewares.filter(middleware => {
+    return typeof middleware === 'function';
+  });
 
   const store = {
     dispatch: originalDispatch,
@@ -15,17 +18,17 @@ const useEnhancedReducer = function useEnhancedReducer(
   const launchMiddlewares = (action, index) => {
     let next = state;
 
-    if (middlewares[index]) {
+    if (cleanedMiddlewares[index]) {
       next = launchMiddlewares(action, index + 1);
     } else {
       return () => originalDispatch(action);
     }
 
-    return middlewares[index](store)(next)(action);
+    return cleanedMiddlewares[index](store)(next)(action);
   };
 
   const dispatch = action => {
-    if (middlewares.length === 0) {
+    if (cleanedMiddlewares.length === 0) {
       return originalDispatch(action);
     }
 

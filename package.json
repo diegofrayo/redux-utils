@@ -1,11 +1,12 @@
 {
   "name": "@diegofrayo/redux-utils",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Enhanced useReducer hook and a redux-duck implementation",
   "homepage": "https://github.com/diegofrayo/redux-utils#readme",
   "license": "MIT",
   "main": "dist/redux-utils.js",
   "module": "dist/redux-utils.umd.js",
+  "unpkg": "dist/redux-utils.umd.js",
   "keywords": [
     "redux",
     "redux-duck",
@@ -27,6 +28,7 @@
   "scripts": {
     "dev": "microbundle --entry src/index.js --output dist --name @diegofrayo/redux-utils --no-compress --watch",
     "build": "microbundle --entry src/index.js --output dist --name @diegofrayo/redux-utils",
+    "prepublish": "npm run build",
     "upload": "npm publish --access public",
     "lint": "eslint -c eslintrc.json src/*.js"
   },
