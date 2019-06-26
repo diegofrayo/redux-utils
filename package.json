@@ -1,0 +1,66 @@
+{
+  "name": "@diegofrayo/redux-utils",
+  "version": "1.0.0",
+  "description": "Enhanced useReducer hook and a redux-duck implementation",
+  "homepage": "https://github.com/diegofrayo/redux-utils#readme",
+  "license": "MIT",
+  "main": "dist/redux-utils.js",
+  "module": "dist/redux-utils.umd.js",
+  "keywords": [
+    "redux",
+    "redux-duck",
+    "react-hooks"
+  ],
+  "bugs": {
+    "email": "diegofrayo@gmail.com",
+    "url": "https://github.com/diegofrayo/redux-utils/issues"
+  },
+  "author": {
+    "name": "Diego Rayo",
+    "email": "diegofrayo@gmail.com",
+    "url": "https://diegofrayo.netlify.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diegofrayo/redux-utils.git"
+  },
+  "scripts": {
+    "dev": "microbundle --entry src/index.js --output dist --name @diegofrayo/redux-utils --no-compress --watch",
+    "build": "microbundle --entry src/index.js --output dist --name @diegofrayo/redux-utils",
+    "upload": "npm publish --access public",
+    "lint": "eslint -c eslintrc.json src/*.js"
+  },
+  "devDependencies": {
+    "@diegofrayo/eslint-config": "^1.0.1",
+    "eslint": "^5.16.0",
+    "husky": "^2.4.1",
+    "lint-staged": "^8.2.1",
+    "microbundle": "^0.11.0",
+    "prettier": "^1.18.2",
+    "react": "^16.8.6"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4"
+  },
+  "engines": {
+    "node": ">=8.15.1"
+  },
+  "files": [
+    "dist/*.js",
+    "dist/*.mjs",
+    "package.json",
+    "README.md"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/*.js": [
+      "prettier --write",
+      "eslint -c eslintrc.json",
+      "git add"
+    ]
+  }
+}
