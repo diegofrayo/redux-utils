@@ -16,15 +16,13 @@ const useEnhancedReducer = function useEnhancedReducer(
   };
 
   const launchMiddlewares = (action, index) => {
-    let next = state;
-
     if (cleanedMiddlewares[index]) {
-      next = launchMiddlewares(action, index + 1);
+      launchMiddlewares(action, index + 1);
     } else {
-      return () => originalDispatch(action);
+      return originalDispatch(action);
     }
 
-    return cleanedMiddlewares[index](store)(next)(action);
+    return cleanedMiddlewares[index](store)(() => {})(action);
   };
 
   const dispatch = action => {
